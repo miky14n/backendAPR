@@ -1,7 +1,6 @@
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 app.MapGet("/", () => "Hellow World! Iam BAckend");
-app.MapGet("/", () => "Hellow World! Iam BAckend");
 app.Run();
 
 
