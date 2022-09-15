@@ -1,5 +1,11 @@
 var builder = WebApplication.CreateBuilder(args);
+var app = builder.Build();
+app.MapGet("/", () => "Hellow World! Iam BAckend");
+app.MapGet("/", () => "Hellow World! Iam BAckend");
+app.Run();
 
+
+/*
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -22,4 +28,4 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.Run();
+app.Run();*/
