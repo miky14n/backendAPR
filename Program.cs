@@ -4,26 +4,22 @@ using appPrevencionRiesgos.Services;
 
 
 var builder = WebApplication.CreateBuilder(args);
-var app = builder.Build();
-app.MapGet("/", () => "Hellow World! Iam BAckend");
-app.Run();
 
-<<<<<<< HEAD
 
-/*
+
 // Add services to the container.
-=======
-IConfiguration config = new ConfigurationBuilder()
-    .AddJsonFile("appsettings.json")
-    .AddEnvironmentVariables()
-    .Build();
-
 builder.Services.AddCors(c =>
 {
     c.AddPolicy("AllowOrigin", options => { options.AllowAnyOrigin(); options.AllowAnyMethod(); options.AllowAnyHeader(); });
 });
 
->>>>>>> 1a75478 (Subiendo ultimos cambios)
+IConfiguration config = new ConfigurationBuilder()
+    .AddJsonFile("appsettings.json")
+    .AddEnvironmentVariables()
+    .Build();
+
+
+
 
 builder.Services.AddControllers();
 
@@ -67,10 +63,4 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-<<<<<<< HEAD
-app.Run();*/
-=======
 app.Run();
-
-
->>>>>>> 1a75478 (Subiendo ultimos cambios)
