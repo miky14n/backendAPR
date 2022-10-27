@@ -26,8 +26,8 @@ builder.Services.AddControllers();
 
 
 //builder.Services.AddTransient<IMongoDBServices, MongoDBService>();
-builder.Services.AddSingleton<IMongoDBServices, MongoDBService>();
-builder.Services.AddScoped<IMongoDBServices, MongoDBService>();
+builder.Services.AddSingleton<IBasicInformationService, BasicInformationService>();
+builder.Services.AddScoped<IBasicInformationService, BasicInformationService>();
 
 var aux = config.GetRequiredSection("MongoDB");
 MongoDBSettings dbConf = new MongoDBSettings() ;

@@ -1,9 +1,17 @@
 ﻿using appPrevencionRiesgos.Data.Entities;
+using appPrevencionRiesgos.Model;
+using Microsoft.Extensions.Options;
+using MongoDB.Driver;
 
 namespace appPrevencionRiesgos.Data.Repository
 {
     public class BasicInformationRepository : IBasicInformationRepository
     {
+        private readonly IMongoCollection<BasicInformationEntity> _informationCollection;
+        public BasicInformationRepository(IMongoCollection<BasicInformationEntity> informationCollection)
+        {
+            _informationCollection = informationCollection;
+        }
         public void CreateInformation(BasicInformationEntity basicInformation)
         {
             throw new NotImplementedException();

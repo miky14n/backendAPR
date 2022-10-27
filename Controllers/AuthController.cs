@@ -3,6 +3,7 @@ using appPrevencionRiesgos.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using appPrevencionRiesgos.Services.Security;
+using appPrevencionRiesgos.Model;
 
 namespace appPrevencionRiesgos.Controllers
 {
@@ -10,19 +11,19 @@ namespace appPrevencionRiesgos.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-        private IMongoDBServices userService;
+        private IBasicInformationService userService;
 
-        public AuthController(IMongoDBServices userService)
+        public AuthController(IBasicInformationService userService)
         {
             this.userService = userService;
         }
         [HttpGet]
-        public async Task<List<UserModel>> Get()
+        public async Task<List<BasicInformationModel>> GetAllBasicInformationAsync()
         {
-
-            return await userService.GetAsync();
+            return await userService.GetAllBasicInformationAsync();
         }
         // /api/auth/userx  
+        /*
         [HttpPost("User")]
         public async Task<IActionResult> RegisterAsync([FromBody] UserModel model)
         {
@@ -30,7 +31,7 @@ namespace appPrevencionRiesgos.Controllers
 
             return CreatedAtAction(nameof(Get), new { mail = model.email }, model);
         }
-
+        */
        
     }
 }
