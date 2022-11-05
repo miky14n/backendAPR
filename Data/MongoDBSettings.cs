@@ -1,4 +1,4 @@
-﻿namespace appPrevencionRiesgos.Model
+﻿namespace appPrevencionRiesgos.Data
 {
     public class MongoDBSettings
     {

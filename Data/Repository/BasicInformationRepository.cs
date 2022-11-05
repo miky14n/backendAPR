@@ -7,32 +7,33 @@ namespace appPrevencionRiesgos.Data.Repository
 {
     public class BasicInformationRepository : IBasicInformationRepository
     {
-        private readonly IMongoCollection<BasicInformationEntity> _informationCollection;
-        public BasicInformationRepository(IMongoCollection<BasicInformationEntity> informationCollection)
+        internal MongoDBRepository _mongoRepository = new MongoDBRepository();
+        private IMongoCollection<BasicInformationModel> collection;
+        public BasicInformationRepository()
         {
-            _informationCollection = informationCollection;
+            collection = _mongoRepository.dbContext.GetCollection<BasicInformationModel>("BasicInformation");
         }
         public void CreateInformation(BasicInformationEntity basicInformation)
         {
             throw new NotImplementedException();
         }
 
-        public Task DeleteInformationAsync(int informationId)
+        public async Task DeleteInformationAsync(int informationId)
         {
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<BasicInformationEntity>> GetAllInformationAsync(string direction, string orderBy)
+        public async Task<IEnumerable<BasicInformationEntity>> GetAllInformationAsync(string direction, string orderBy)
         {
             throw new NotImplementedException();
         }
 
-        public Task<BasicInformationEntity> GetOneInformationAsync(int informationId, bool showInformation = false)
+        public async Task<BasicInformationEntity> GetOneInformationAsync(int informationId, bool showInformation = false)
         {
             throw new NotImplementedException();
         }
 
-        public Task UpdateInformationAsync(int informationId, BasicInformationEntity basicInformation)
+        public async Task UpdateInformationAsync(int informationId, BasicInformationEntity basicInformation)
         {
             throw new NotImplementedException();
         }

@@ -5,6 +5,7 @@ using MongoDB.Bson;
 using appPrevencionRiesgos.Model.Security;
 using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
+using appPrevencionRiesgos.Data;
 
 namespace appPrevencionRiesgos.Services;
 

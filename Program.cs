@@ -1,5 +1,4 @@
-using appPrevencionRiesgos.Model;
-
+using appPrevencionRiesgos.Data;
 using appPrevencionRiesgos.Services;
 
 
