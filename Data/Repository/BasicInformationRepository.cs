@@ -32,7 +32,7 @@ namespace appPrevencionRiesgos.Data.Repository
 
         public async Task<BasicInformationEntity> GetOneInformationAsync(string informationId, bool showInformation = false)
         {
-            throw new NotImplementedException();
+            return await collection.FindAsync(new BsonDocument { { "_id", new ObjectId(informationId) } }).Result.FirstAsync();
         }
 
         public async Task UpdateInformationAsync(string informationId, BasicInformationEntity basicInformation)
