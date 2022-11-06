@@ -16,7 +16,7 @@ namespace appPrevencionRiesgos.Data.Repository
         }
         public void CreateInformation(BasicInformationEntity basicInformation)
         {
-            throw new NotImplementedException();
+            collection.InsertOne(basicInformation);
         }
 
         public async Task DeleteInformationAsync(string informationId)
