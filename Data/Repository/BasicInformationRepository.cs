@@ -37,7 +37,8 @@ namespace appPrevencionRiesgos.Data.Repository
 
         public async Task UpdateInformationAsync(string informationId, BasicInformationEntity basicInformation)
         {
-            throw new NotImplementedException();
+            var informationToUpdate = Builders<BasicInformationEntity>.Filter.Eq(i => i.Id, basicInformation.Id);
+            await collection.ReplaceOneAsync(informationToUpdate, basicInformation);
         }
     }
 }
