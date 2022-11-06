@@ -1,8 +1,12 @@
-﻿namespace appPrevencionRiesgos.Data.Entities
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+
+namespace appPrevencionRiesgos.Data.Entities
 {
     public class BasicInformationEntity
     {
-        public int Id { get; set; }
+        [BsonId]
+        public ObjectId Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string PhoneNumber { get; set; }

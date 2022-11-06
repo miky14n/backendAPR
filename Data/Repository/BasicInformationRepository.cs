@@ -1,6 +1,7 @@
 ﻿using appPrevencionRiesgos.Data.Entities;
 using appPrevencionRiesgos.Model;
 using Microsoft.Extensions.Options;
+using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace appPrevencionRiesgos.Data.Repository
@@ -8,19 +9,20 @@ namespace appPrevencionRiesgos.Data.Repository
     public class BasicInformationRepository : IBasicInformationRepository
     {
         internal MongoDBRepository _mongoRepository = new MongoDBRepository();
-        private IMongoCollection<BasicInformationModel> collection;
+        private IMongoCollection<BasicInformationEntity> collection;
         public BasicInformationRepository()
         {
-            collection = _mongoRepository.dbContext.GetCollection<BasicInformationModel>("BasicInformation");
+            collection = _mongoRepository.dbContext.GetCollection<BasicInformationEntity>("BasicInformation");
         }
         public void CreateInformation(BasicInformationEntity basicInformation)
         {
             throw new NotImplementedException();
         }
 
-        public async Task DeleteInformationAsync(int informationId)
+        public async Task DeleteInformationAsync(string informationId)
         {
-            throw new NotImplementedException();
+            var informationToDelete = Builders<BasicInformationEntity>.Filter.Eq(i => i.Id, new ObjectId(informationId));
+            await collection.DeleteOneAsync(informationToDelete);
         }
 
         public async Task<IEnumerable<BasicInformationEntity>> GetAllInformationAsync(string direction, string orderBy)
@@ -28,12 +30,12 @@ namespace appPrevencionRiesgos.Data.Repository
             throw new NotImplementedException();
         }
 
-        public async Task<BasicInformationEntity> GetOneInformationAsync(int informationId, bool showInformation = false)
+        public async Task<BasicInformationEntity> GetOneInformationAsync(string informationId, bool showInformation = false)
         {
             throw new NotImplementedException();
         }
 
-        public async Task UpdateInformationAsync(int informationId, BasicInformationEntity basicInformation)
+        public async Task UpdateInformationAsync(string informationId, BasicInformationEntity basicInformation)
         {
             throw new NotImplementedException();
         }
