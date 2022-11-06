@@ -27,7 +27,7 @@ namespace appPrevencionRiesgos.Data.Repository
 
         public async Task<IEnumerable<BasicInformationEntity>> GetAllInformationAsync(string direction, string orderBy)
         {
-            throw new NotImplementedException();
+            return await collection.FindAsync(new BsonDocument()).Result.ToListAsync();
         }
 
         public async Task<BasicInformationEntity> GetOneInformationAsync(string informationId, bool showInformation = false)
