@@ -1,32 +1,43 @@
 ﻿using appPrevencionRiesgos.Data.Entities;
+using Microsoft.VisualBasic;
+using MongoDB.Bson;
+using MongoDB.Driver;
 
 namespace appPrevencionRiesgos.Data.Repository
 {
     public class UserRepository : IUserRepository
     {
+        internal MongoDbContext _mongoRepository = new MongoDbContext();
+        private IMongoCollection<UserEntity> collection;
+        public UserRepository()
+        {
+            collection = _mongoRepository.dbContext.GetCollection<UserEntity>("User");
+        }
         public void CreateUser(UserEntity user)
         {
-            throw new NotImplementedException();
+            collection.InsertOne(user);
         }
 
-        public Task DeleteUserAsync(string userId)
+        public async Task DeleteUserAsync(string userId)
         {
-            throw new NotImplementedException();
+            var userToDelete = Builders<UserEntity>.Filter.Eq(i => i.Id, new ObjectId(userId));
+            await collection.DeleteOneAsync(userToDelete);
         }
 
-        public Task<IEnumerable<UserEntity>> GetAllUsersAsync(string direction, string orderBy)
+        public async Task<IEnumerable<UserEntity>> GetAllUsersAsync(string direction, string orderBy)
         {
-            throw new NotImplementedException();
+            return await collection.FindAsync(new BsonDocument()).Result.ToListAsync();
         }
 
-        public Task<UserEntity> GetOneUserAsync(string userId, bool showUser = false)
+        public async Task<UserEntity> GetOneUserAsync(string userId, bool showUser = false)
         {
-            throw new NotImplementedException();
+            return await collection.FindAsync(new BsonDocument { { "_id", new ObjectId(userId) } }).Result.FirstAsync();
         }
 
-        public Task UpdateUserAsync(string userId, UserEntity user)
+        public async Task UpdateUserAsync(string userId, UserEntity user)
         {
-            throw new NotImplementedException();
+            var userToUpdate = Builders<UserEntity>.Filter.Eq(i => i.Id, user.Id);
+            await collection.ReplaceOneAsync(userToUpdate, user);
         }
     }
 }
