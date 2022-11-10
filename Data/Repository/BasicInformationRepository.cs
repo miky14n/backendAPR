@@ -11,7 +11,7 @@ namespace appPrevencionRiesgos.Data.Repository
 
         public BasicInformationRepository()
         {
-            collection = _mongoRepository.dbContext.GetCollection<BasicInformationEntity>("BasicInformation");
+            collection = _mongoRepository.basicInformationDbContext.GetCollection<BasicInformationEntity>("BasicInformation");
         }
 
         public void CreateInformation(BasicInformationEntity basicInformation)
