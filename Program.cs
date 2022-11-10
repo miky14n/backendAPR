@@ -1,7 +1,8 @@
+using appPrevencionRiesgos.Data.Repository;
+using appPrevencionRiesgos;
 using appPrevencionRiesgos.Model;
-
 using appPrevencionRiesgos.Services;
-
+using appPrevencionRiesgos.Services.Security;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,6 +29,13 @@ builder.Services.AddControllers();
 //builder.Services.AddTransient<IMongoDBServices, MongoDBService>();
 builder.Services.AddSingleton<IMongoDBServices, MongoDBService>();
 builder.Services.AddScoped<IMongoDBServices, MongoDBService>();
+builder.Services.AddControllers();
+builder.Services.AddTransient<IBasicInformationService, BasicInformationService>();
+builder.Services.AddTransient<IBasicInformationRepository, BasicInformationRepository>();
+builder.Services.AddScoped<IUserService, UserService>();
+
+//Map model and entitys (equality)
+builder.Services.AddAutoMapper(typeof(Program));
 
 var aux = config.GetRequiredSection("MongoDB");
 MongoDBSettings dbConf = new MongoDBSettings() ;
