@@ -25,12 +25,12 @@ namespace appPrevencionRiesgos.Data.Repository
             await collection.DeleteOneAsync(informationToDelete);
         }
 
-        public async Task<IEnumerable<BasicInformationEntity>> GetAllInformationAsync(string direction, string orderBy)
+        public async Task<IEnumerable<BasicInformationEntity>> GetAllInformationAsync()
         {
             return await collection.FindAsync(new BsonDocument()).Result.ToListAsync();
         }
 
-        public async Task<BasicInformationEntity> GetOneInformationAsync(string informationId, bool showInformation = false)
+        public async Task<BasicInformationEntity> GetOneInformationAsync(string informationId)
         {
             return await collection.FindAsync(new BsonDocument { { "_id", new ObjectId(informationId) } }).Result.FirstAsync();
         }

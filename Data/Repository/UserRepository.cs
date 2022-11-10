@@ -24,12 +24,12 @@ namespace appPrevencionRiesgos.Data.Repository
             await collection.DeleteOneAsync(userToDelete);
         }
 
-        public async Task<IEnumerable<UserEntity>> GetAllUsersAsync(string direction, string orderBy)
+        public async Task<IEnumerable<UserEntity>> GetAllUsersAsync()
         {
             return await collection.FindAsync(new BsonDocument()).Result.ToListAsync();
         }
 
-        public async Task<UserEntity> GetOneUserAsync(string userId, bool showUser = false)
+        public async Task<UserEntity> GetOneUserAsync(string userId)
         {
             return await collection.FindAsync(new BsonDocument { { "_id", new ObjectId(userId) } }).Result.FirstAsync();
         }
