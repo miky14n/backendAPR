@@ -17,14 +17,14 @@ namespace appPrevencionRiesgos.Controllers
             this.userService = userService;
         }
         [HttpGet]
-        public async Task<List<UserModel>> Get()
+        public async Task<List<UserInformationModel>> Get()
         {
 
             return await userService.GetAsync();
         }
         // /api/auth/userx  
         [HttpPost("User")]
-        public async Task<IActionResult> RegisterAsync([FromBody] UserModel model)
+        public async Task<IActionResult> RegisterAsync([FromBody] UserInformationModel model)
         {
             await userService.CreateAsync(model);
 

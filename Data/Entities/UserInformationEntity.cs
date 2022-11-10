@@ -1,8 +1,8 @@
 ﻿using MongoDB.Bson;
 
-namespace appPrevencionRiesgos.Model.Security
+namespace appPrevencionRiesgos.Data.Entities
 {
-    public class UserModel
+    public class UserInformationEntity
     {
         public ObjectId Id { get; set; }
         public string Email { get; set; }

@@ -11,7 +11,7 @@ namespace appPrevencionRiesgos.Data
         {
             this.CreateMap<BasicInformationEntity, BasicInformationModel>()
                 .ReverseMap();
-            this.CreateMap<UserEntity, UserModel>()
+            this.CreateMap<UserInformationEntity, UserInformationModel>()
                 .ReverseMap();
         }
     }

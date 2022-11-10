@@ -4,10 +4,10 @@ namespace appPrevencionRiesgos.Data.Repository
 {
     public interface IUserRepository
     {
-        Task<IEnumerable<UserEntity>> GetAllUsersAsync();
-        Task<UserEntity> GetOneUserAsync(string userId);
-        Task CreateUser(UserEntity user);
-        Task UpdateUserAsync(string userId, UserEntity user);
+        Task<IEnumerable<UserInformationEntity>> GetAllUsersAsync();
+        Task<UserInformationEntity> GetOneUserAsync(string userId);
+        Task CreateUser(UserInformationEntity user);
+        Task UpdateUserAsync(string userId, UserInformationEntity user);
         Task DeleteUserAsync(string userId);
     }
 }
