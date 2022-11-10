@@ -10,9 +10,11 @@ namespace appPrevencionRiesgos.Data
 
         public MongoDbContext()
         {
-            client = new MongoClient("mongodb://localhost:27017");
+            var settings = MongoClientSettings.FromConnectionString("mongodb+srv://admin:admin@cluster0.kvvx9em.mongodb.net/?retryWrites=true&w=majority");
+            settings.ServerApi = new ServerApi(ServerApiVersion.V1);
+            client = new MongoClient(settings);
             basicInformationDbContext = client.GetDatabase("BasicInformation");
-            UserDbContext = client.GetDatabase("User");
+            UserDbContext = client.GetDatabase("UserInformation");
         }
     }
 }
