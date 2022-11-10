@@ -9,9 +9,9 @@ namespace appPrevencionRiesgos.Services
 {
     public class BasicInformationService : IBasicInformationService
     {
-        private IUserInformationRepository _informationRepository;
+        private IBasicInformationRepository _informationRepository;
         private IMapper _mapper;
-        public BasicInformationService(IUserInformationRepository informationRepository, IMapper mapper)
+        public BasicInformationService(IBasicInformationRepository informationRepository, IMapper mapper)
         {
             _informationRepository = informationRepository;
             _mapper = mapper;

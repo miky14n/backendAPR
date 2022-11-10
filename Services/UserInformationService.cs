@@ -20,7 +20,7 @@ namespace appPrevencionRiesgos.Services
         }
         public async Task<UserInformationModel> CreateUser(UserInformationModel userInformation)
         {
-            var userEntity = _mapper.Map<BasicInformationEntity>(userInformation);
+            var userEntity = _mapper.Map<UserInformationEntity>(userInformation);
             await _userRepository.CreateUser(userEntity);
             if (true)
             {

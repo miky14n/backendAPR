@@ -4,7 +4,7 @@ using MongoDB.Driver;
 
 namespace appPrevencionRiesgos.Data.Repository
 {
-    public class BasicInformationRepository : IUserInformationRepository
+    public class BasicInformationRepository : IBasicInformationRepository
     {
         internal MongoDbContext _dbContext = new MongoDbContext();
         private IMongoCollection<BasicInformationEntity> collection;
