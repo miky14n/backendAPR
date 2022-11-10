@@ -5,11 +5,11 @@ using MongoDB.Driver;
 
 namespace appPrevencionRiesgos.Data.Repository
 {
-    public class UserRepository : IUserRepository
+    public class UserInformationRepository : IUserInformationRepository
     {
         internal MongoDbContext _mongoRepository = new MongoDbContext();
         private IMongoCollection<UserInformationEntity> collection;
-        public UserRepository()
+        public UserInformationRepository()
         {
             collection = _mongoRepository.UserDbContext.GetCollection<UserInformationEntity>("User");
         }
