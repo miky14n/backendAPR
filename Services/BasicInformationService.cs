@@ -1,6 +1,9 @@
-﻿using appPrevencionRiesgos.Data.Repository;
+﻿using appPrevencionRiesgos.Data.Entities;
+using appPrevencionRiesgos.Data.Repository;
+using appPrevencionRiesgos.Exceptions;
 using appPrevencionRiesgos.Model;
 using AutoMapper;
+using MongoDB.Bson;
 
 namespace appPrevencionRiesgos.Services
 {
@@ -14,36 +17,57 @@ namespace appPrevencionRiesgos.Services
             _mapper = mapper;
         }
 
-        public void CreateInformation(BasicInformationModel basicInformation)
+        public async Task<BasicInformationModel> CreateInformation(BasicInformationModel basicInformation)
         {
-            var informationEntity = _mapper.Map<FilmFranchiseEntity>(filmFranchise);
-            _franchiseRepository.CreateFranchise(informationEntity);
-            var result = await _franchiseRepository.SaveChangesAsync();
-            if (result)
+            var informationEntity = _mapper.Map<BasicInformationEntity>(basicInformation);
+            await _informationRepository.CreateInformation(informationEntity);
+            if (true)
             {
-                return _mapper.Map<FilmFranchiseModel>(informationEntity);
+                return _mapper.Map<BasicInformationModel>(informationEntity);
             }
             throw new Exception("Database Error.");
         }
 
-        public Task DeleteInformationAsync(string informationId)
+        public async Task DeleteInformationAsync(string informationId)
         {
-            throw new NotImplementedException();
+            var result = await GetOneInformationAsync(informationId);
+            await _informationRepository.DeleteInformationAsync(informationId);
+            if (result == null)
+            {
+                throw new Exception("Database Error.");
+            }
         }
 
-        public Task<IEnumerable<BasicInformationModel>> GetAllInformationAsync()
+        public async Task<IEnumerable<BasicInformationModel>> GetAllInformationAsync()
         {
-            throw new NotImplementedException();
+            var informationEntityList = await _informationRepository.GetAllInformationAsync();
+            return _mapper.Map<IEnumerable<BasicInformationModel>>(informationEntityList);
         }
 
-        public Task<BasicInformationModel> GetOneInformationAsync(string informationId)
+        public async Task<BasicInformationModel> GetOneInformationAsync(string informationId)
         {
-            throw new NotImplementedException();
+            var information = await _informationRepository.GetOneInformationAsync(informationId);
+
+            if (information == null)
+                throw new NotFoundElementException($"Information with id:{informationId} does not exists.");
+
+            return _mapper.Map<BasicInformationModel>(information);
         }
 
-        public Task<BasicInformationModel> UpdateInformationAsync(string informationId, BasicInformationModel basicInformation)
+        public async Task<BasicInformationModel> UpdateInformationAsync(string informationId, BasicInformationModel basicInformation)
         {
-            throw new NotImplementedException();
+            var result = await GetOneInformationAsync(informationId);
+            var informationEntity = _mapper.Map<BasicInformationEntity>(basicInformation);
+            informationEntity.Id = new ObjectId(informationId);
+
+            await _informationRepository.UpdateInformationAsync(informationId, informationEntity);
+
+            if (result != null)
+            {
+                return _mapper.Map<BasicInformationModel>(informationEntity);
+            }
+
+            throw new Exception("Database Error.");
         }
     }
 }

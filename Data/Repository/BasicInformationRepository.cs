@@ -6,12 +6,12 @@ namespace appPrevencionRiesgos.Data.Repository
 {
     public class BasicInformationRepository : IBasicInformationRepository
     {
-        internal MongoDbContext _mongoRepository = new MongoDbContext();
+        internal MongoDbContext _dbContext = new MongoDbContext();
         private IMongoCollection<BasicInformationEntity> collection;
 
         public BasicInformationRepository()
         {
-            collection = _mongoRepository.basicInformationDbContext.GetCollection<BasicInformationEntity>("BasicInformation");
+            collection = _dbContext.basicInformationDbContext.GetCollection<BasicInformationEntity>("BasicInformation");
         }
 
         public async Task CreateInformation(BasicInformationEntity basicInformation)
