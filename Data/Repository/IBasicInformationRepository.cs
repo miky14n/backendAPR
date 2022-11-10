@@ -2,7 +2,7 @@
 
 namespace appPrevencionRiesgos.Data.Repository
 {
-    public interface IBasicInformationRepository
+    public interface IUserInformationRepository
     {
         Task<IEnumerable<BasicInformationEntity>> GetAllInformationAsync();
         Task<BasicInformationEntity> GetOneInformationAsync(string informationId);
