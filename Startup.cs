@@ -1,5 +1,6 @@
 ﻿using appPrevencionRiesgos.Data;
 using appPrevencionRiesgos.Data.Repository;
+using appPrevencionRiesgos.Model;
 using appPrevencionRiesgos.Services;
 using appPrevencionRiesgos.Services.Security;
 using AutoMapper;
@@ -28,12 +29,11 @@ namespace appPrevencionRiesgos
 {
     public class Startup
     {
+        public IConfiguration Configuration { get; }
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
-
-        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -41,7 +41,9 @@ namespace appPrevencionRiesgos
             services.AddControllers();
             services.AddTransient<IBasicInformationService, BasicInformationService>();
             services.AddTransient<IBasicInformationRepository, BasicInformationRepository>();
-            services.AddScoped<IUserService, UserService>();
+            //services.AddScoped<IUserService, UserService>();
+            services.AddSingleton<IMongoDBServices, MongoDBService>();
+            services.AddScoped<IMongoDBServices, MongoDBService>();
 
             //Map model and entitys (equality)
             services.AddAutoMapper(typeof(Startup));
@@ -50,6 +52,17 @@ namespace appPrevencionRiesgos
             {
                 c.AddPolicy("AllowOrigin", options => { options.AllowAnyOrigin(); options.AllowAnyMethod(); options.AllowAnyHeader(); });
             });
+
+            var aux = Configuration.GetRequiredSection("MongoDB");
+            MongoDBSettings dbConf = new MongoDBSettings();
+            dbConf.ConnectionURI = aux["ConnectionURI"];
+            dbConf.DatabaseName = aux["DatabaseName"];
+            dbConf.CollectionName = aux["CollectionName"];
+            //Console.WriteLine(dbConf);
+
+            services.Configure<MongoDBSettings>(Configuration.GetSection("MongoDB"));
+            services.AddEndpointsApiExplorer();
+            services.AddSwaggerGen();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -70,14 +83,6 @@ namespace appPrevencionRiesgos
             {
                 endpoints.MapControllers();
                 //endpoints.MapControllers().RequireAuthorization();
-            });
-
-            //static files
-            app.UseStaticFiles();
-            app.UseStaticFiles(new StaticFileOptions()
-            {
-                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"Resources")),
-                RequestPath = new PathString("/Resources")
             });
         }
     }
