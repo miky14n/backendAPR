@@ -28,7 +28,7 @@ namespace appPrevencionRiesgos.Controllers
         {
             await userService.CreateAsync(model);
 
-            return CreatedAtAction(nameof(Get), new { mail = model.email }, model);
+            return CreatedAtAction(nameof(Get), new { mail = model.Email }, model);
         }
 
        

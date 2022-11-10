@@ -1,18 +1,28 @@
+using appPrevencionRiesgos.Data.Repository;
+using appPrevencionRiesgos;
 using appPrevencionRiesgos.Model;
-
 using appPrevencionRiesgos.Services;
+using appPrevencionRiesgos.Services.Security;
 
 
-var builder = WebApplication.CreateBuilder(args);
-
-
-
-// Add services to the container.
-builder.Services.AddCors(c =>
+namespace appPrevencionRiesgos
 {
-    c.AddPolicy("AllowOrigin", options => { options.AllowAnyOrigin(); options.AllowAnyMethod(); options.AllowAnyHeader(); });
-});
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            CreateHostBuilder(args).Build().Run();
+        }
 
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    webBuilder.UseStartup<Startup>();
+                });
+    }
+}
+/*
 IConfiguration config = new ConfigurationBuilder()
     .AddJsonFile("appsettings.json")
     .AddEnvironmentVariables()
@@ -28,6 +38,13 @@ builder.Services.AddControllers();
 //builder.Services.AddTransient<IMongoDBServices, MongoDBService>();
 builder.Services.AddSingleton<IMongoDBServices, MongoDBService>();
 builder.Services.AddScoped<IMongoDBServices, MongoDBService>();
+builder.Services.AddControllers();
+builder.Services.AddTransient<IBasicInformationService, BasicInformationService>();
+builder.Services.AddTransient<IBasicInformationRepository, BasicInformationRepository>();
+builder.Services.AddScoped<IUserService, UserService>();
+
+//Map model and entitys (equality)
+builder.Services.AddAutoMapper(typeof(Program));
 
 var aux = config.GetRequiredSection("MongoDB");
 MongoDBSettings dbConf = new MongoDBSettings() ;
@@ -64,3 +81,4 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+*/
