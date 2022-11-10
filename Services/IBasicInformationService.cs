@@ -7,7 +7,7 @@ namespace appPrevencionRiesgos.Services
     {
         Task<IEnumerable<BasicInformationModel>> GetAllInformationAsync();
         Task<BasicInformationModel> GetOneInformationAsync(string informationId);
-        void CreateInformation(BasicInformationModel basicInformation);
+        Task<BasicInformationModel> CreateInformation(BasicInformationModel basicInformation);
         Task<BasicInformationModel> UpdateInformationAsync(string informationId, BasicInformationModel basicInformation);
         Task DeleteInformationAsync(string informationId);
     }

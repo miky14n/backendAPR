@@ -14,9 +14,9 @@ namespace appPrevencionRiesgos.Data.Repository
             collection = _mongoRepository.basicInformationDbContext.GetCollection<BasicInformationEntity>("BasicInformation");
         }
 
-        public void CreateInformation(BasicInformationEntity basicInformation)
+        public async Task CreateInformation(BasicInformationEntity basicInformation)
         {
-            collection.InsertOne(basicInformation);
+            await collection.InsertOneAsync(basicInformation);
         }
 
         public async Task DeleteInformationAsync(string informationId)

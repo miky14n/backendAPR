@@ -6,7 +6,7 @@ namespace appPrevencionRiesgos.Data.Repository
     {
         Task<IEnumerable<BasicInformationEntity>> GetAllInformationAsync();
         Task<BasicInformationEntity> GetOneInformationAsync(string informationId);
-        void CreateInformation(BasicInformationEntity basicInformation);
+        Task CreateInformation(BasicInformationEntity basicInformation);
         Task UpdateInformationAsync(string informationId, BasicInformationEntity basicInformation);
         Task DeleteInformationAsync(string informationId);
     }

@@ -13,9 +13,9 @@ namespace appPrevencionRiesgos.Data.Repository
         {
             collection = _mongoRepository.UserDbContext.GetCollection<UserEntity>("User");
         }
-        public void CreateUser(UserEntity user)
+        public async Task CreateUser(UserEntity user)
         {
-            collection.InsertOne(user);
+            await collection.InsertOneAsync(user);
         }
 
         public async Task DeleteUserAsync(string userId)
