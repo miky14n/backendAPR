@@ -34,6 +34,11 @@ namespace appPrevencionRiesgos.Data.Repository
             return await collection.FindAsync(new BsonDocument { { "_id", new ObjectId(userId) } }).Result.FirstAsync();
         }
 
+        public async Task<UserInformationEntity> GetByEmailAsync(string uId)
+        {
+            return await collection.FindAsync(new BsonDocument { { "UserId", uId } }).Result.FirstAsync();
+        }
+
         public async Task UpdateUserAsync(string userId, UserInformationEntity user)
         {
             var userToUpdate = Builders<UserInformationEntity>.Filter.Eq(i => i.Id, user.Id);
