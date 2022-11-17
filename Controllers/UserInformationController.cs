@@ -53,6 +53,24 @@ namespace appPrevencionRiesgos.Controllers
             }
         }
 
+        [HttpGet("uid/{uid}")]
+        public async Task<ActionResult<UserInformationModel>> GetByEmailAsync(string uid)
+        {
+            try
+            {
+                var information = await _userService.GetByEmailAsync(uid);
+                return Ok(information);
+            }
+            catch (NotFoundElementException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Something happend.");
+            }
+        }
+
         [HttpPost]
         public async Task<ActionResult<UserInformationModel>> PostUserAsync([FromBody] UserInformationModel information)
         {

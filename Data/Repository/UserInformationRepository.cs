@@ -11,7 +11,7 @@ namespace appPrevencionRiesgos.Data.Repository
         private IMongoCollection<UserInformationEntity> collection;
         public UserInformationRepository()
         {
-            collection = _mongoRepository.UserDbContext.GetCollection<UserInformationEntity>("UserInformation");
+            collection = _mongoRepository.UserDbContext.GetCollection<UserInformationEntity>("UserInformationAPI");
         }
         public async Task CreateUser(UserInformationEntity user)
         {
@@ -32,6 +32,11 @@ namespace appPrevencionRiesgos.Data.Repository
         public async Task<UserInformationEntity> GetOneUserAsync(string userId)
         {
             return await collection.FindAsync(new BsonDocument { { "_id", new ObjectId(userId) } }).Result.FirstAsync();
+        }
+
+        public async Task<UserInformationEntity> GetByEmailAsync(string uId)
+        {
+            return await collection.FindAsync(new BsonDocument { { "UserId", uId } }).Result.FirstAsync();
         }
 
         public async Task UpdateUserAsync(string userId, UserInformationEntity user)
