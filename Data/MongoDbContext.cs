@@ -7,6 +7,7 @@ namespace appPrevencionRiesgos.Data
         public MongoClient client;
         public IMongoDatabase basicInformationDbContext;
         public IMongoDatabase UserDbContext;
+        public IMongoDatabase LocationDbContext;
 
         public MongoDbContext()
         {
@@ -15,6 +16,7 @@ namespace appPrevencionRiesgos.Data
             client = new MongoClient(settings);
             basicInformationDbContext = client.GetDatabase("BasicInformation");
             UserDbContext = client.GetDatabase("UserInformationAPI");
+            LocationDbContext = client.GetDatabase("LocationInformationAPI");
         }
     }
 }
