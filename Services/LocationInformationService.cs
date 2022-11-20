@@ -12,7 +12,7 @@ namespace appPrevencionRiesgos.Services
     {
         private ILocationInformationRepository _locationRepository;
         private IMapper _mapper;
-        public LocationInformationService(IBasicInformationRepository locationRepository, IMapper mapper)
+        public LocationInformationService(ILocationInformationRepository locationRepository, IMapper mapper)
         {
             _locationRepository = locationRepository;
             _mapper = mapper;
