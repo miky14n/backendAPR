@@ -11,7 +11,7 @@ namespace appPrevencionRiesgos.Data.Repository
         private IMongoCollection<UserInformationEntity> collection;
         public UserInformationRepository()
         {
-            collection = _mongoRepository.UserDbContext.GetCollection<UserInformationEntity>("UserInformationAPI");
+            collection = _mongoRepository.UserDbContext.GetCollection<UserInformationEntity>("UserInfoAPI");
         }
         public async Task CreateUser(UserInformationEntity user)
         {
@@ -20,7 +20,7 @@ namespace appPrevencionRiesgos.Data.Repository
 
         public async Task DeleteUserAsync(string userId)
         {
-            var userToDelete = Builders<UserInformationEntity>.Filter.Eq(i => i.Id, new ObjectId(userId));
+            var userToDelete = Builders<UserInformationEntity>.Filter.Eq(i => i.UserId, userId);
             await collection.DeleteOneAsync(userToDelete);
         }
 
@@ -31,17 +31,12 @@ namespace appPrevencionRiesgos.Data.Repository
 
         public async Task<UserInformationEntity> GetOneUserAsync(string userId)
         {
-            return await collection.FindAsync(new BsonDocument { { "_id", new ObjectId(userId) } }).Result.FirstAsync();
-        }
-
-        public async Task<UserInformationEntity> GetByEmailAsync(string uId)
-        {
-            return await collection.FindAsync(new BsonDocument { { "UserId", uId } }).Result.FirstAsync();
+            return await collection.FindAsync(new BsonDocument { { "UserId", userId } }).Result.FirstAsync();
         }
 
         public async Task UpdateUserAsync(string userId, UserInformationEntity user)
         {
-            var userToUpdate = Builders<UserInformationEntity>.Filter.Eq(i => i.Id, user.Id);
+            var userToUpdate = Builders<UserInformationEntity>.Filter.Eq(i => i.UserId, user.UserId);
             await collection.ReplaceOneAsync(userToUpdate, user);
         }
     }

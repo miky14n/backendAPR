@@ -9,8 +9,6 @@ namespace appPrevencionRiesgos.Data
     {
         public AutoMapperProfile()
         {
-            this.CreateMap<BasicInformationEntity, BasicInformationModel>()
-                .ReverseMap();
             this.CreateMap<UserInformationEntity, UserInformationModel>()
                 .ReverseMap();
             this.CreateMap<LocationEntity, LocationModel>()
