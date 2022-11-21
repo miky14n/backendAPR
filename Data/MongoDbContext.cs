@@ -15,7 +15,7 @@ namespace appPrevencionRiesgos.Data
             settings.ServerApi = new ServerApi(ServerApiVersion.V1);
             client = new MongoClient(settings);
             basicInformationDbContext = client.GetDatabase("BasicInformation");
-            UserDbContext = client.GetDatabase("UserInformationAPI");
+            UserDbContext = client.GetDatabase("UserInfoAPI");
             LocationDbContext = client.GetDatabase("LocationInformationAPI");
         }
     }

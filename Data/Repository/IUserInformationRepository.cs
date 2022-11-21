@@ -6,7 +6,6 @@ namespace appPrevencionRiesgos.Data.Repository
     {
         Task<IEnumerable<UserInformationEntity>> GetAllUsersAsync();
         Task<UserInformationEntity> GetOneUserAsync(string userId);
-        Task<UserInformationEntity> GetByEmailAsync(string uId);
         Task CreateUser(UserInformationEntity user);
         Task UpdateUserAsync(string userId, UserInformationEntity user);
         Task DeleteUserAsync(string userId);
