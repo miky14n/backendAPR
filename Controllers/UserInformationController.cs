@@ -31,7 +31,7 @@ namespace appPrevencionRiesgos.Controllers
             }
             catch (Exception)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, "Something happend.");
+                return StatusCode(StatusCodes.Status500InternalServerError, "Something happened.");
             }
         }
 
@@ -49,25 +49,7 @@ namespace appPrevencionRiesgos.Controllers
             }
             catch (Exception)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, "Something happend.");
-            }
-        }
-
-        [HttpGet("uid/{uid}")]
-        public async Task<ActionResult<UserInformationModel>> GetByEmailAsync(string uid)
-        {
-            try
-            {
-                var information = await _userService.GetByEmailAsync(uid);
-                return Ok(information);
-            }
-            catch (NotFoundElementException ex)
-            {
-                return NotFound(ex.Message);
-            }
-            catch (Exception)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, "Something happend.");
+                return StatusCode(StatusCodes.Status500InternalServerError, "Something happened.");
             }
         }
 
@@ -80,7 +62,7 @@ namespace appPrevencionRiesgos.Controllers
                     return BadRequest(ModelState);
 
                 var newInformation = await _userService.CreateUser(information);
-                var newId = Convert.ToString(newInformation.Id);
+                var newId = Convert.ToString(newInformation.UserId);
                 return Created($"/api/userinformation/{newId}", newInformation);
             }
             catch (NotFoundElementException ex)
@@ -89,7 +71,7 @@ namespace appPrevencionRiesgos.Controllers
             }
             catch (Exception)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, "Something happend.");
+                return StatusCode(StatusCodes.Status500InternalServerError, "Something happened.");
             }
         }
 
@@ -98,7 +80,7 @@ namespace appPrevencionRiesgos.Controllers
         {
             try
             {
-                information.Id = new ObjectId(id);
+                information.UserId = id;
                 var updatedInformation = await _userService.UpdateUserAsync(id, information);
                 return Ok(updatedInformation);
             }
@@ -108,7 +90,7 @@ namespace appPrevencionRiesgos.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, $"Something happend: {ex.Message}.");
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Something happened: {ex.Message}.");
             }
         }
 
